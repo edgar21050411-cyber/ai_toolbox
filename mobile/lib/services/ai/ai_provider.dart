@@ -1,4 +1,3 @@
-import '../../core/errors/app_errors.dart';
 
 class AIRequest {
   final String toolId;

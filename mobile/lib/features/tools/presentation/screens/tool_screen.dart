@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/app_spacing.dart';
-import '../../../../core/i18n/app_localizations.dart';
 import '../../../../services/ai/ai_router.dart';
 import '../../../../services/ai/ai_provider.dart';
 import '../../../../services/analytics/analytics_service.dart';

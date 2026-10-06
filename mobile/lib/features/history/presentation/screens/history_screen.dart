@@ -5,7 +5,6 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../core/i18n/app_localizations.dart';
 import '../../data/history_repository.dart';
-import '../../domain/generation.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});

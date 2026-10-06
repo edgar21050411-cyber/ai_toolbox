@@ -42,6 +42,7 @@ jobs:
           if [ ! -d "android" ]; then
             echo "Scaffolding Android platform files..."
             flutter create . --platforms=android --org=com.aitoolbox
+            git checkout test/widget_test.dart 2>/dev/null || true
           fi
 
       - name: Install Dependencies
