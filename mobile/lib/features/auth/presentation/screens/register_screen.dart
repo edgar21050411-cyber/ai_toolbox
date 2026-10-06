@@ -32,7 +32,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> _submit() async {
     setState(() => _errorMessage = null);
-    final i18n = AppLocalizations.of(context);
     final name = _nameController.text.trim();
     final email = _emailController.text.trim();
     final password = _passwordController.text;
