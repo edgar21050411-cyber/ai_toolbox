@@ -41,11 +41,11 @@ class AIRouter {
       );
 
       final msg = e.toString().toLowerCase();
-      if (msg.contains('insufficient') || msg.contains('créditos')) {
+      if (msg.contains('insufficient') || msg.contains('créditos') || msg.contains('creditos')) {
         throw const InsufficientCreditsError(requiredCredits: 0, currentBalance: 0);
-      } else if (msg.contains('no disponible')) {
+      } else if (msg.contains('no disponible') || msg.contains('no está disponible') || msg.contains('no esta disponible') || msg.contains('unavailable')) {
         throw ToolUnavailableError(toolSlug: request.toolId);
-      } else if (msg.contains('unauthorized') || msg.contains('autorización')) {
+      } else if (msg.contains('unauthorized') || msg.contains('autorización') || msg.contains('autorizacion')) {
         throw const AuthenticationError();
       }
 
