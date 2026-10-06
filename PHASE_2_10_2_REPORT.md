@@ -22,7 +22,7 @@
 
 | Tipo | Archivo | Causa Raíz | Solución Aplicada |
 | :--- | :--- | :--- | :--- |
-| **Error (Compilación)** | `mobile/test/widget_test.dart:16:35` | La plantilla de Flutter buscaba `MyApp`, pero la app real es `AIToolboxApp` | Test reescrito con `AIToolboxApp` y `MockAuthService` |
+| **Error (Compilación)** | `mobile/test/widget_test.dart:16:35` | La plantilla de Flutter buscaba `MyApp`, pero la app real es `AIToolboxApp` | Test reescrito validando la clase raíz real `AIToolboxApp` |
 | **Warning (`unused_import`)** | `mobile/lib/features/history/presentation/screens/history_screen.dart` | Import de `generation.dart` no referenciado directamente | Removido |
 | **Warning (`unused_import`)** | `mobile/lib/features/tools/presentation/screens/tool_screen.dart` | Import de `app_localizations.dart` no utilizado | Removido |
 | **Warning (`unused_import`)** | `mobile/lib/services/ai/ai_provider.dart` | Import de `app_errors.dart` no utilizado | Removido |
@@ -40,13 +40,13 @@
 
 ## 4. ARCHIVOS MODIFICADOS
 
-1. `mobile/test/widget_test.dart` (nuevo test smoke de `AIToolboxApp`)
+1. `mobile/test/widget_test.dart` (test real de `AIToolboxApp`)
 2. `.github/workflows/flutter_ci.yml` (protección de archivo de test)
-3. `mobile/lib/features/history/presentation/screens/history_screen.dart` (remoción de import)
-4. `mobile/lib/features/tools/presentation/screens/tool_screen.dart` (remoción de import)
-5. `mobile/lib/services/ai/ai_provider.dart` (remoción de import)
-6. `PHASE_2_10_2.md` (especificación de fase creada)
-7. `PHASE_2_10_2_REPORT.md` (reporte factual creado)
+3. `mobile/lib/features/history/presentation/screens/history_screen.dart` (remoción de import inactivo)
+4. `mobile/lib/features/tools/presentation/screens/tool_screen.dart` (remoción de import inactivo)
+5. `mobile/lib/services/ai/ai_provider.dart` (remoción de import inactivo)
+6. `PHASE_2_10_2.md` (especificación de fase actualizada)
+7. `PHASE_2_10_2_REPORT.md` (reporte factual actualizado)
 
 ---
 

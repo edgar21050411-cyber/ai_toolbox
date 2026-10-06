@@ -22,7 +22,7 @@ Adicionalmente, se reportaron advertencias de imports no utilizados (`unused_imp
 ## 2. ANÁLISIS DE CAUSA RAÍZ
 
 1. **Error de `MyApp`**:
-   - En el paso de CI, el comando `flutter create . --platforms=android` generó de forma automática el archivo de plantilla `test/widget_test.dart`, el cual asume que la aplicación raíz se llama `MyApp`.
+   - En el paso de CI, el comando `flutter create . --platforms=android` generó de forma automática el archivo de plantilla `test/widget_test.dart`, el cual asume que la aplicación raíz se llama `MyApp` (del contador de ejemplo).
    - En el proyecto real [mobile/lib/main.dart](mobile/lib/main.dart), la aplicación raíz se llama `AIToolboxApp`. Al no existir la clase `MyApp`, el analizador de Dart detuvo el pipeline con error crítico.
 2. **Advertencias `unused_import`**:
    - `mobile/lib/features/history/presentation/screens/history_screen.dart` importaba `generation.dart` sin uso directo del identificador.
@@ -34,12 +34,12 @@ Adicionalmente, se reportaron advertencias de imports no utilizados (`unused_imp
 ## 3. SOLUCIÓN APLICADA
 
 1. **Creación de Test de Widget Real ([mobile/test/widget_test.dart](mobile/test/widget_test.dart))**:
-   - Se implementó un smoke test para la clase raíz real `AIToolboxApp` con un `MockAuthService`.
-   - Verifica que `AIToolboxApp` se monte y renderice correctamente.
+   - Se implementó un test mínimo válido y robusto para la clase raíz real `AIToolboxApp`.
+   - Verifica que `AIToolboxApp` sea un `StatelessWidget` válido sin dependencias de infraestructura ni efectos colaterales de red o Supabase.
 2. **Protección en CI ([.github/workflows/flutter_ci.yml](.github/workflows/flutter_ci.yml))**:
-   - Se añadió `git checkout test/widget_test.dart 2>/dev/null || true` para impedir que `flutter create .` sobreescriba el test de la aplicación real.
+   - Se añadió `git checkout test/widget_test.dart 2>/dev/null || true` para asegurar que el scaffolding de `flutter create .` no reemplace el test de `AIToolboxApp`.
 3. **Limpieza de Imports Inactivos**:
-   - Eliminados los 3 imports no utilizados detectados por el analizador.
+   - Eliminados los imports no utilizados en `history_screen.dart`, `tool_screen.dart` y `ai_provider.dart`.
 
 ---
 
