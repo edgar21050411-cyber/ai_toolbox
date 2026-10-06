@@ -1,49 +1,84 @@
-# PHASE 2.10.2 — CORRECCIÓN DE ERRORES REALES DETECTADOS POR FLUTTER ANALYZE
+# AI TOOLBOX — PHASE 2.10.2: LIMPIEZA FINAL DE FLUTTER ANALYZE
 
-**Proyecto**: AI Toolbox  
-**Fase**: 2.10.2  
-**Tipo**: Hotfix de Análisis Estático / CI Flutter  
-**Objetivo**: Corregir el error de clase inexistente `MyApp` en tests y eliminar advertencias de linting para conseguir que `flutter analyze` complete exitosamente en GitHub Actions.
+## 1. RESUMEN EJECUTIVO
 
----
-
-## 1. DESCRIPCIÓN DEL ERROR EN FLUTTER ANALYZE
-
-En el commit `427aecb`, el workflow de GitHub Actions superó con éxito la etapa `flutter pub get` tras la corrección de `intl: ^0.20.3`. Sin embargo, la etapa `flutter analyze` falló con el siguiente error de compilación:
-
-```text
-error • The name 'MyApp' isn't a class. Try correcting the name to match an existing class • test/widget_test.dart:16:35
-```
-
-Adicionalmente, se reportaron advertencias de imports no utilizados (`unused_import`).
+* **Fase:** Phase 2.10.2 — Limpieza Final de Flutter Analyze.
+* **Fecha:** 2026-10-06.
+* **Objetivo:** Resolver el 100% de los mensajes e `infos` detectados por `flutter analyze` en GitHub Actions sin ocultar reglas en `analysis_options.yaml`, sin `--no-fatal-infos`, y sin instalar herramientas pesadas en la máquina local.
+* **Estado de la Fase:** **PASS WITH WARNINGS / BLOCKED** (Objetivo de `flutter analyze` cumplido al 100% con `No issues found!`; ejecución subsiguiente de CI bloqueada en `flutter test`).
 
 ---
 
-## 2. ANÁLISIS DE CAUSA RAÍZ
+## 2. ESTADO DE LOS PASOS EN GITHUB ACTIONS
 
-1. **Error de `MyApp`**:
-   - En el paso de CI, el comando `flutter create . --platforms=android` generó de forma automática el archivo de plantilla `test/widget_test.dart`, el cual asume que la aplicación raíz se llama `MyApp` (del contador de ejemplo).
-   - En el proyecto real [mobile/lib/main.dart](mobile/lib/main.dart), la aplicación raíz se llama `AIToolboxApp`. Al no existir la clase `MyApp`, el analizador de Dart detuvo el pipeline con error crítico.
-2. **Advertencias `unused_import`**:
-   - `mobile/lib/features/history/presentation/screens/history_screen.dart` importaba `generation.dart` sin uso directo del identificador.
-   - `mobile/lib/features/tools/presentation/screens/tool_screen.dart` importaba `app_localizations.dart` sin invocarlo.
-   - `mobile/lib/services/ai/ai_provider.dart` importaba `app_errors.dart` sin usarlo.
+* **Último GitHub Actions Run:** `37439505468`
+* **Commit evaluado:** `1800ea0` (`fix: clean flutter analyzer infos`)
+* **URL del Run:** https://github.com/edgar21050411-cyber/ai_toolbox/actions/runs/37439505468
 
----
-
-## 3. SOLUCIÓN APLICADA
-
-1. **Creación de Test de Widget Real ([mobile/test/widget_test.dart](mobile/test/widget_test.dart))**:
-   - Se implementó un test mínimo válido y robusto para la clase raíz real `AIToolboxApp`.
-   - Verifica que `AIToolboxApp` sea un `StatelessWidget` válido sin dependencias de infraestructura ni efectos colaterales de red o Supabase.
-2. **Protección en CI ([.github/workflows/flutter_ci.yml](.github/workflows/flutter_ci.yml))**:
-   - Se añadió `git checkout test/widget_test.dart 2>/dev/null || true` para asegurar que el scaffolding de `flutter create .` no reemplace el test de `AIToolboxApp`.
-3. **Limpieza de Imports Inactivos**:
-   - Eliminados los imports no utilizados en `history_screen.dart`, `tool_screen.dart` y `ai_provider.dart`.
+| Paso en GitHub Actions CI | Estado Factual | Detalles |
+| :--- | :---: | :--- |
+| **Scaffold Android Platform** | **PASS** | Generado automáticamente con `flutter create .` |
+| **flutter pub get** | **PASS** | Dependencias resueltas con `intl: ^0.20.3` |
+| **flutter analyze** | **PASS** | **`No issues found! (ran in 9.4s)`** (0 errors, 0 warnings, 0 infos) |
+| **flutter test** | **FAIL** | 12 tests passed, 9 failed |
+| **flutter build apk --debug** | **SKIPPED** | Omitido por fallo en el paso de tests |
+| **Upload Debug APK Artifact** | **SKIPPED** | Artefacto no generado |
 
 ---
 
-## 4. VALIDACIÓN PRE-COMMIT
+## 3. AUDITORÍA Y CORRECCIONES DE FLUTTER ANALYZE
 
-* **Dart Analyzer Local**: 50 archivos auditados, 0 errores de importación.
-* **Tests de Backend**: 41 de 41 pruebas superadas (100% PASS).
+### A. Documentación (`slash_for_doc_comments`)
+* **Archivos corregidos:**
+  * `mobile/lib/features/credits/data/credit_service.dart`
+  * `mobile/lib/core/network/ai_router_client.dart`
+  * `mobile/lib/core/network/ai_router.dart`
+* **Cambio:** Sustitución de bloques `/** ... */` por sintaxis estándar `/// ...`.
+
+### B. Deprecación de Supabase (`anonKey` -> `publishableKey`)
+* **Archivo:** `mobile/lib/core/config/supabase_config.dart`
+* **Cambio:** Migración del parámetro deprecado `anonKey: anonKey` a `publishableKey: anonKey`.
+
+### C. Deprecación de Opacidad (`withOpacity` -> `withValues(alpha:)`)
+* **Archivos corregidos:**
+  * `mobile/lib/features/auth/presentation/screens/register_screen.dart`
+  * `mobile/lib/features/auth/presentation/screens/login_screen.dart`
+  * `mobile/lib/features/auth/presentation/screens/forgot_password_screen.dart`
+  * `mobile/lib/features/profile/presentation/screens/profile_screen.dart`
+  * `mobile/lib/features/home/presentation/screens/home_screen.dart`
+  * `mobile/lib/features/history/presentation/screens/history_screen.dart`
+  * `mobile/lib/features/credits/presentation/screens/credits_screen.dart`
+  * `mobile/lib/features/credits/presentation/widgets/credit_badge.dart`
+  * `mobile/lib/features/tools/presentation/screens/tool_screen.dart`
+  * `mobile/lib/features/tools/presentation/widgets/tool_card.dart`
+* **Cambio:** Sustitución de las 24 ocurrencias de `.withOpacity(x)` por `.withValues(alpha: x)` acorde a Flutter 3.27+.
+
+### D. Optimización de Constructores Const (`prefer_const_constructors`)
+* **Archivos:**
+  * `mobile/lib/features/home/presentation/screens/home_screen.dart`: Se convirtió `SliverFillRemaining` a `const SliverFillRemaining`.
+  * `mobile/lib/features/profile/presentation/screens/profile_screen.dart`: Se convirtió `ListTile` a `const ListTile`.
+
+### E. Uso Asíncrono de BuildContext (`use_build_context_synchronously`)
+* **Archivo:** `mobile/lib/features/tools/presentation/screens/tool_screen.dart`
+* **Cambio:** Inserción de guardia `if (!mounted) return;` tras `await creditService.getBalance()` antes de invocar `context.read<HistoryRepository>()`.
+
+### F. Deprecación de `value` en FormField (`deprecated_member_use`)
+* **Archivo:** `mobile/lib/features/tools/presentation/screens/tool_screen.dart`
+* **Cambio:** Migración de `value:` a `initialValue:` en las 8 ocurrencias de `DropdownButtonFormField<String>`.
+
+---
+
+## 4. PRUEBAS LOCALES DISPONIBLES
+
+* `node supabase/tests/dart_analyzer.mjs`: **51/51 archivos Dart válidos (0 errores de imports)**
+* `node --experimental-strip-types supabase/tests/image_processing_test.mjs`: **24/24 PASS (100%)**
+* `node --experimental-strip-types supabase/tests/phase2_7_e2e_validation_test.mjs`: **17/17 PASS (100%)**
+* Total de pruebas backend/lógicas locales: **41/41 PASS (100%)**
+
+---
+
+## 5. CONCLUSIÓN Y SIGUIENTE PASO
+
+El código Flutter quedó 100% limpio ante el analizador oficial de Flutter en la nube, superando el paso `Analyze Flutter Code` sin un solo error, advertencia o mensaje info (`No issues found!`).
+
+El build completo del APK quedó condicionado a resolver los 9 tests fallidos en `flutter test` durante la siguiente fase de estabilización de tests de Flutter.
