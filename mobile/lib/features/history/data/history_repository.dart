@@ -4,14 +4,15 @@ import '../domain/generation.dart';
 import '../../../services/logging/logger_service.dart';
 
 class HistoryRepository extends ChangeNotifier {
-  final SupabaseClient _supabase;
+  final SupabaseClient? _client;
+  SupabaseClient get _supabase => _client ?? Supabase.instance.client;
   final LoggerService _logger = LoggerService();
 
   List<Generation> _generations = [];
   bool _isLoading = false;
 
   HistoryRepository({SupabaseClient? client})
-      : _supabase = client ?? Supabase.instance.client;
+      : _client = client;
 
   List<Generation> get generations => List.unmodifiable(_generations);
   bool get isLoading => _isLoading;

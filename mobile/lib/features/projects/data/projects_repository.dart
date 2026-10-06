@@ -4,14 +4,15 @@ import '../domain/project.dart';
 import '../../../services/logging/logger_service.dart';
 
 class ProjectsRepository extends ChangeNotifier {
-  final SupabaseClient _supabase;
+  final SupabaseClient? _client;
+  SupabaseClient get _supabase => _client ?? Supabase.instance.client;
   final LoggerService _logger = LoggerService();
 
   List<Project> _projects = [];
   bool _isLoading = false;
 
   ProjectsRepository({SupabaseClient? client})
-      : _supabase = client ?? Supabase.instance.client;
+      : _client = client;
 
   List<Project> get projects => List.unmodifiable(_projects);
   bool get isLoading => _isLoading;

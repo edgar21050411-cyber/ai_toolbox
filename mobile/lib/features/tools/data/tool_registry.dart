@@ -4,7 +4,8 @@ import '../domain/tool_entity.dart';
 import '../../../services/logging/logger_service.dart';
 
 class ToolRegistry extends ChangeNotifier {
-  final SupabaseClient _supabase;
+  final SupabaseClient? _client;
+  SupabaseClient get _supabase => _client ?? Supabase.instance.client;
   final LoggerService _logger = LoggerService();
 
   final Map<String, ToolEntity> _toolsBySlug = {};
@@ -12,7 +13,7 @@ class ToolRegistry extends ChangeNotifier {
   bool _isLoading = false;
 
   ToolRegistry({SupabaseClient? client})
-      : _supabase = client ?? Supabase.instance.client;
+      : _client = client;
 
   List<ToolEntity> get allTools => List.unmodifiable(_toolsList);
   bool get isLoading => _isLoading;

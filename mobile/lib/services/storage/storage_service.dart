@@ -4,11 +4,12 @@ import '../../core/errors/app_errors.dart';
 import '../logging/logger_service.dart';
 
 class StorageService {
-  final SupabaseClient _supabase;
+  final SupabaseClient? _client;
+  SupabaseClient get _supabase => _client ?? Supabase.instance.client;
   final LoggerService _logger = LoggerService();
 
   StorageService({SupabaseClient? client})
-      : _supabase = client ?? Supabase.instance.client;
+      : _client = client;
 
   String? get _currentUserId => _supabase.auth.currentUser?.id;
 

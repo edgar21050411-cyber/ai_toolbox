@@ -4,14 +4,15 @@ import '../../../core/errors/app_errors.dart';
 import '../../../services/logging/logger_service.dart';
 
 class CreditService extends ChangeNotifier {
-  final SupabaseClient _supabase;
+  final SupabaseClient? _client;
+  SupabaseClient get _supabase => _client ?? Supabase.instance.client;
   final LoggerService _logger = LoggerService();
 
   int _cachedBalance = 0;
   bool _isLoading = false;
 
   CreditService({SupabaseClient? client})
-      : _supabase = client ?? Supabase.instance.client;
+      : _client = client;
 
   int get balance => _cachedBalance;
   bool get isLoading => _isLoading;
