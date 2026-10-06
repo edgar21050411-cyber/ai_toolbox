@@ -1,0 +1,90 @@
+{
+  "app": {
+    "name": "AI Toolbox",
+    "tagline": "Tu suite modular de productividad con IA"
+  },
+  "home": {
+    "title": "¿Qué quieres hacer?",
+    "subtitle": "Selecciona una categoría o busca una herramienta",
+    "search_placeholder": "Buscar herramientas de IA...",
+    "popular_tools": "Herramientas populares",
+    "categories": {
+      "all": "Todas",
+      "text": "Texto",
+      "marketing": "Marketing",
+      "images": "Imágenes",
+      "create": "Crear",
+      "improve": "Mejorar",
+      "documents": "Documentos",
+      "audio": "Audio",
+      "assistant": "Asistente"
+    }
+  },
+  "nav": {
+    "home": "Inicio",
+    "history": "Historial",
+    "projects": "Proyectos",
+    "profile": "Perfil",
+    "settings": "Ajustes"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "register": "Crear cuenta",
+    "logout": "Cerrar sesión",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "recover_password": "Recuperar contraseña",
+    "send_recovery_email": "Enviar enlace de recuperación",
+    "recovery_sent": "Se ha enviado un correo con instrucciones",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "full_name": "Nombre completo",
+    "accept_terms": "Acepto los términos y condiciones de uso",
+    "continue_with_google": "Continuar con Google",
+    "continue_with_apple": "Continuar con Apple",
+    "have_account": "¿Ya tienes una cuenta? Inicia sesión",
+    "no_account": "¿Aún no tienes cuenta? Regístrate"
+  },
+  "credits": {
+    "balance": "Créditos",
+    "top_up": "Recargar créditos",
+    "cost": "créditos",
+    "insufficient": "No tienes suficientes créditos para esta operación.",
+    "free_welcome": "15 créditos iniciales de bienvenida"
+  },
+  "tool": {
+    "coming_soon": "Próximamente",
+    "execute": "Procesar",
+    "cost_label": "Costo de ejecución",
+    "description": "Descripción",
+    "input_label": "Entrada de datos",
+    "result_label": "Resultado"
+  },
+  "history": {
+    "title": "Historial de Creaciones",
+    "empty": "Aún no tienes generaciones registradas.",
+    "status": {
+      "processing": "Procesando...",
+      "completed": "Completado",
+      "failed": "Fallido"
+    }
+  },
+  "projects": {
+    "title": "Mis Proyectos",
+    "create": "Nuevo Proyecto",
+    "edit": "Editar nombre",
+    "delete": "Eliminar",
+    "open": "Abrir",
+    "empty": "No hay proyectos creados aún.",
+    "name_label": "Nombre del proyecto",
+    "desc_label": "Descripción opcional"
+  },
+  "common": {
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "retry": "Reintentar",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error inesperado"
+  }
+}

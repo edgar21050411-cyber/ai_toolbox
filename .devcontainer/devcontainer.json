@@ -1,0 +1,17 @@
+﻿{
+  "name": "AI Toolbox Cloud Dev Environment",
+  "image": "ghcr.io/cirruslabs/flutter:stable",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Dart-Code.flutter",
+        "Dart-Code.dart-code"
+      ]
+    }
+  },
+  "postCreateCommand": "cd mobile && if [ ! -d \"android\" ]; then flutter create . --platforms=android --org=com.aitoolbox; fi && flutter pub get",
+  "remoteUser": "root"
+}

@@ -1,0 +1,43 @@
+﻿# Environment & Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.jks
+google-services.json
+GoogleService-Info.plist
+key.properties
+local.properties
+
+# Flutter / Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android
+.gradle/
+**/android/.gradle/
+**/android/captures/
+**/android/local.properties
+**/android/**/build/
+
+# iOS / macOS
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.framework
+**/ios/.symlinks/
+**/ios/Pods/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# IDE & OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,90 @@
+{
+  "app": {
+    "name": "AI Toolbox",
+    "tagline": "Your modular AI productivity suite"
+  },
+  "home": {
+    "title": "What do you want to do?",
+    "subtitle": "Select a category or search for an AI tool",
+    "search_placeholder": "Search AI tools...",
+    "popular_tools": "Popular tools",
+    "categories": {
+      "all": "All",
+      "text": "Text",
+      "marketing": "Marketing",
+      "images": "Images",
+      "create": "Create",
+      "improve": "Improve",
+      "documents": "Documents",
+      "audio": "Audio",
+      "assistant": "Assistant"
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "history": "History",
+    "projects": "Projects",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Sign Up",
+    "logout": "Sign Out",
+    "forgot_password": "Forgot your password?",
+    "recover_password": "Recover password",
+    "send_recovery_email": "Send recovery link",
+    "recovery_sent": "A password recovery email has been sent",
+    "email": "Email address",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "full_name": "Full name",
+    "accept_terms": "I accept terms and conditions",
+    "continue_with_google": "Continue with Google",
+    "continue_with_apple": "Continue with Apple",
+    "have_account": "Already have an account? Sign in",
+    "no_account": "Don't have an account? Sign up"
+  },
+  "credits": {
+    "balance": "Credits",
+    "top_up": "Top up credits",
+    "cost": "credits",
+    "insufficient": "You do not have enough credits for this operation.",
+    "free_welcome": "15 free welcome credits"
+  },
+  "tool": {
+    "coming_soon": "Coming Soon",
+    "execute": "Process",
+    "cost_label": "Execution cost",
+    "description": "Description",
+    "input_label": "Input data",
+    "result_label": "Result"
+  },
+  "history": {
+    "title": "Creation History",
+    "empty": "No generations recorded yet.",
+    "status": {
+      "processing": "Processing...",
+      "completed": "Completed",
+      "failed": "Failed"
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "create": "New Project",
+    "edit": "Edit name",
+    "delete": "Delete",
+    "open": "Open",
+    "empty": "No projects created yet.",
+    "name_label": "Project name",
+    "desc_label": "Optional description"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "retry": "Retry",
+    "loading": "Loading...",
+    "error": "An unexpected error occurred"
+  }
+}
