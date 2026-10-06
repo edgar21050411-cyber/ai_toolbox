@@ -31,7 +31,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 44,
-                    backgroundColor: AppColors.primary.withOpacity(0.2),
+                    backgroundColor: AppColors.primary.withValues(alpha: 0.2),
                     child: const Icon(Icons.person, size: 48, color: AppColors.primary),
                   ),
                   const SizedBox(height: AppSpacing.md),
@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.15),
+                      color: AppColors.primary.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
             // Logout Button
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.accentRose.withOpacity(0.15),
+                backgroundColor: AppColors.accentRose.withValues(alpha: 0.15),
                 foregroundColor: AppColors.accentRose,
                 side: const BorderSide(color: AppColors.accentRose),
               ),

@@ -312,7 +312,7 @@ class _ToolScreenState extends State<ToolScreen> {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.15),
+                      color: AppColors.primary.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(_mapIcon(widget.tool.icon), color: AppColors.primary, size: 28),
@@ -334,9 +334,9 @@ class _ToolScreenState extends State<ToolScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
-                      color: AppColors.accentAmber.withOpacity(0.15),
+                      color: AppColors.accentAmber.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.accentAmber.withOpacity(0.4)),
+                      border: Border.all(color: AppColors.accentAmber.withValues(alpha: 0.4)),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -360,9 +360,9 @@ class _ToolScreenState extends State<ToolScreen> {
                 margin: const EdgeInsets.only(bottom: AppSpacing.md),
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: AppColors.accentRose.withOpacity(0.15),
+                  color: AppColors.accentRose.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.accentRose.withOpacity(0.4)),
+                  border: Border.all(color: AppColors.accentRose.withValues(alpha: 0.4)),
                 ),
                 child: Text(
                   _errorMessage!,
@@ -745,7 +745,7 @@ class _ToolScreenState extends State<ToolScreen> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: AppColors.accentGreen.withOpacity(0.15),
+                    color: AppColors.accentGreen.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Text('✓ Generado', style: TextStyle(color: AppColors.accentGreen, fontSize: 12, fontWeight: FontWeight.bold)),
@@ -841,7 +841,7 @@ class _ToolScreenState extends State<ToolScreen> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.12),
+                color: AppColors.primary.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text('CTA: $cta', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
@@ -948,7 +948,7 @@ class _ToolScreenState extends State<ToolScreen> {
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(110, 36),
-                  backgroundColor: AppColors.primary.withOpacity(0.2),
+                  backgroundColor: AppColors.primary.withValues(alpha: 0.2),
                   foregroundColor: AppColors.primaryLight,
                 ),
                 onPressed: () => _copyToClipboard(textResult),

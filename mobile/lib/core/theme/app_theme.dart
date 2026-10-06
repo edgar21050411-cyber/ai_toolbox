@@ -5,6 +5,11 @@ import 'app_spacing.dart';
 import 'app_radius.dart';
 
 class AppTheme {
+  static const Color primary = AppColors.primary;
+  static const Color surfaceDark = AppColors.darkSurface;
+  static const Color accentAmber = AppColors.accentAmber;
+  static const Color textSecondaryDark = AppColors.darkTextSecondary;
+
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,

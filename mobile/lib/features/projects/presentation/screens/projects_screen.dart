@@ -128,7 +128,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.folder_open, size: 64, color: AppColors.darkTextSecondary.withOpacity(0.5)),
+                      Icon(Icons.folder_open, size: 64, color: AppColors.darkTextSecondary.withValues(alpha: 0.5)),
                       const SizedBox(height: AppSpacing.md),
                       Text(
                         i18n?.translate('projects.empty') ?? 'No hay proyectos creados aún.',
@@ -162,7 +162,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: AppColors.primary.withOpacity(0.12),
+                              color: AppColors.primary.withValues(alpha: 0.12),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Icon(Icons.folder, color: AppColors.primary),

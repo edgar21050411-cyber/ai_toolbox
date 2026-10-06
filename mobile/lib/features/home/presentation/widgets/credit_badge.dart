@@ -18,9 +18,9 @@ class CreditBadge extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: AppTheme.primary.withOpacity(0.15),
+          color: AppTheme.primary.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: AppTheme.primary.withOpacity(0.4), width: 1.2),
+          border: Border.all(color: AppTheme.primary.withValues(alpha: 0.4), width: 1.2),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

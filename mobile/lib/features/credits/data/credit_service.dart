@@ -18,9 +18,7 @@ class CreditService extends ChangeNotifier {
 
   String? get _currentUserId => _supabase.auth.currentUser?.id;
 
-  /**
-   * Obtiene el saldo actual del usuario desde credit_balances gobernado por RLS.
-   */
+  /// Obtiene el saldo actual del usuario desde credit_balances gobernado por RLS.
   Future<int> getBalance() async {
     final uid = _currentUserId;
     if (uid == null) throw const AuthenticationError();
@@ -46,17 +44,13 @@ class CreditService extends ChangeNotifier {
     }
   }
 
-  /**
-   * Verifica en la UI si el usuario cuenta con saldo suficiente antes de iniciar.
-   * La deducciÃ³n real y atÃ³mica la ejecuta el backend en el AI Router.
-   */
+    /// Verifica en la UI si el usuario cuenta con saldo suficiente antes de iniciar.
+  /// La deducciÃ³n real y atÃ³mica la ejecuta el backend en el AI Router.
   bool canAfford(int cost) {
     return _cachedBalance >= cost;
   }
 
-  /**
-   * Actualiza el saldo en memoria cuando el backend responde con un nuevo balance.
-   */
+    /// Actualiza el saldo en memoria cuando el backend responde con un nuevo balance.
   void updateBalance(int newBalance) {
     _cachedBalance = newBalance;
     _logger.info('Credit balance updated in client: $_cachedBalance');

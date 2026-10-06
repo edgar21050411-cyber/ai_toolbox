@@ -77,10 +77,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 margin: const EdgeInsets.only(bottom: AppSpacing.md),
                 padding: const EdgeInsets.all(AppSpacing.md),
                 decoration: BoxDecoration(
-                  color: (_isSuccess ? AppColors.accentGreen : AppColors.accentRose).withOpacity(0.15),
+                  color: (_isSuccess ? AppColors.accentGreen : AppColors.accentRose).withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: (_isSuccess ? AppColors.accentGreen : AppColors.accentRose).withOpacity(0.4),
+                    color: (_isSuccess ? AppColors.accentGreen : AppColors.accentRose).withValues(alpha: 0.4),
                   ),
                 ),
                 child: Text(

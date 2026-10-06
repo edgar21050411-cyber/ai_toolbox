@@ -39,7 +39,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         child: NavigationBar(
           selectedIndex: _currentIndex,
           backgroundColor: AppColors.darkSurface,
-          indicatorColor: AppColors.primary.withOpacity(0.2),
+          indicatorColor: AppColors.primary.withValues(alpha: 0.2),
           onDestinationSelected: (index) {
             setState(() {
               _currentIndex = index;

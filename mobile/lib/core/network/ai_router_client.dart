@@ -44,9 +44,7 @@ class AIRouterClient {
   AIRouterClient({SupabaseClient? client})
       : _supabase = client ?? Supabase.instance.client;
 
-  /**
-   * Invoca de manera segura la Edge Function del backend sin exponer API keys de IA.
-   */
+  /// Invoca de manera segura la Edge Function del backend sin exponer API keys de IA.
   Future<AIRouterResponse> executeTool({
     required String toolId,
     required Map<String, dynamic> input,

@@ -9,10 +9,8 @@ class AIRouter {
 
   AIRouter({AIRouterClient? client}) : _client = client ?? AIRouterClient();
 
-  /**
-   * Enruta la solicitud hacia la Edge Function del backend de forma segura.
-   * La app cliente NUNCA interactúa directamente con OpenAI o Gemini.
-   */
+    /// Enruta la solicitud hacia la Edge Function del backend de forma segura.
+  /// La app cliente NUNCA interactúa directamente con OpenAI o Gemini.
   Future<AIResponse> generate(AIRequest request) async {
     _logger.info(
       'AIRouter delegating tool execution to Supabase Edge Function',

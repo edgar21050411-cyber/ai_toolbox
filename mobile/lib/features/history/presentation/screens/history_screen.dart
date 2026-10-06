@@ -53,7 +53,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.history_toggle_off, size: 64, color: AppColors.darkTextSecondary.withOpacity(0.5)),
+                      Icon(Icons.history_toggle_off, size: 64, color: AppColors.darkTextSecondary.withValues(alpha: 0.5)),
                       const SizedBox(height: AppSpacing.md),
                       Text(
                         i18n?.translate('history.empty') ?? 'Aún no tienes generaciones registradas.',
