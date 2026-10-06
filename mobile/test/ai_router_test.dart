@@ -39,7 +39,7 @@ void main() {
       final mockClient = MockAIRouterClient();
       final router = AIRouter(client: mockClient);
 
-      final req = const AIRequest(
+      const req = AIRequest(
         toolId: 'rewrite_text',
         input: {'text': 'Hola mundo'},
       );
@@ -59,7 +59,7 @@ void main() {
       );
       final router = AIRouter(client: mockClient);
 
-      final req = const AIRequest(
+      const req = AIRequest(
         toolId: 'create_campaign',
         input: {'text': 'Tienda de zapatos'},
       );
@@ -77,7 +77,7 @@ void main() {
       );
       final router = AIRouter(client: mockClient);
 
-      final req = const AIRequest(
+      const req = AIRequest(
         toolId: 'disabled_tool',
         input: {'text': 'test'},
       );

@@ -59,7 +59,19 @@ jobs:
           echo '```text' >> $GITHUB_STEP_SUMMARY
           cat analyze_output.log >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
+          while IFS= read -r line; do
+            if [ -n "$line" ]; then
+              echo "::warning title=analyze::$line"
+            fi
+          done < analyze_output.log
           exit $ANALYZE_EXIT
+
+      - name: Upload Analyze Output Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-analyze-output
+          path: mobile/analyze_output.log
 
       - name: Run Flutter Tests
         working-directory: mobile

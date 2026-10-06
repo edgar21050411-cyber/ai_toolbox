@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ai_toolbox/features/tools/domain/tool_entity.dart';
 import 'package:ai_toolbox/services/ai/ai_router.dart';
 import 'package:ai_toolbox/services/ai/ai_provider.dart';
 import 'package:ai_toolbox/core/network/ai_router_client.dart';
