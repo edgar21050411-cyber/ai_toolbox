@@ -88,10 +88,10 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   const Divider(color: AppColors.darkBorder, height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.dark_mode, color: AppColors.secondary),
-                    title: const Text('Tema'),
-                    trailing: const Text('Oscuro (Default)', style: TextStyle(color: AppColors.darkTextSecondary)),
+                  const ListTile(
+                    leading: Icon(Icons.dark_mode, color: AppColors.secondary),
+                    title: Text('Tema'),
+                    trailing: Text('Oscuro (Default)', style: TextStyle(color: AppColors.darkTextSecondary)),
                   ),
                 ],
               ),

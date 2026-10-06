@@ -198,11 +198,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Center(child: CircularProgressIndicator()),
                   )
                 : displayedTools.isEmpty
-                    ? SliverFillRemaining(
+                    ? const SliverFillRemaining(
                         child: Center(
                           child: Text(
                             'No se encontraron herramientas en esta selección',
-                            style: const TextStyle(color: AppColors.darkTextSecondary),
+                            style: TextStyle(color: AppColors.darkTextSecondary),
                           ),
                         ),
                       )

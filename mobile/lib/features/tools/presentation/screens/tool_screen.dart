@@ -247,6 +247,7 @@ class _ToolScreenState extends State<ToolScreen> {
 
       // Actualizar saldo reactivo en memoria
       await creditService.getBalance();
+      if (!mounted) return;
       // Refrescar historial
       context.read<HistoryRepository>().fetchHistory();
 
@@ -431,7 +432,7 @@ class _ToolScreenState extends State<ToolScreen> {
           const Text('Tono de redacción', style: AppTypography.heading2),
           const SizedBox(height: AppSpacing.sm),
           DropdownButtonFormField<String>(
-            value: _selectedTone,
+            initialValue: _selectedTone,
             items: _tones.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
             onChanged: (val) => setState(() => _selectedTone = val ?? _selectedTone),
           ),
@@ -461,7 +462,7 @@ class _ToolScreenState extends State<ToolScreen> {
                     const Text('Origen', style: AppTypography.caption),
                     const SizedBox(height: 4),
                     DropdownButtonFormField<String>(
-                      value: _selectedSourceLang,
+                      initialValue: _selectedSourceLang,
                       items: ['Auto (detectar)', ..._languages]
                           .map((l) => DropdownMenuItem(value: l, child: Text(l, style: const TextStyle(fontSize: 13))))
                           .toList(),
@@ -478,7 +479,7 @@ class _ToolScreenState extends State<ToolScreen> {
                     const Text('Destino', style: AppTypography.caption),
                     const SizedBox(height: 4),
                     DropdownButtonFormField<String>(
-                      value: _selectedTargetLang,
+                      initialValue: _selectedTargetLang,
                       items: _languages
                           .map((l) => DropdownMenuItem(value: l, child: Text(l, style: const TextStyle(fontSize: 13))))
                           .toList(),
@@ -509,7 +510,7 @@ class _ToolScreenState extends State<ToolScreen> {
           const Text('Longitud del resumen', style: AppTypography.heading2),
           const SizedBox(height: AppSpacing.sm),
           DropdownButtonFormField<String>(
-            value: _selectedLength,
+            initialValue: _selectedLength,
             items: _lengths.map((l) => DropdownMenuItem(value: l, child: Text(l))).toList(),
             onChanged: (val) => setState(() => _selectedLength = val ?? _selectedLength),
           ),
@@ -552,7 +553,7 @@ class _ToolScreenState extends State<ToolScreen> {
                     const Text('Plataforma', style: AppTypography.caption),
                     const SizedBox(height: 4),
                     DropdownButtonFormField<String>(
-                      value: _selectedPlatform,
+                      initialValue: _selectedPlatform,
                       items: _platforms
                           .map((p) => DropdownMenuItem(value: p, child: Text(p, style: const TextStyle(fontSize: 13))))
                           .toList(),
@@ -569,7 +570,7 @@ class _ToolScreenState extends State<ToolScreen> {
                     const Text('Tono', style: AppTypography.caption),
                     const SizedBox(height: 4),
                     DropdownButtonFormField<String>(
-                      value: _selectedTone,
+                      initialValue: _selectedTone,
                       items: _tones
                           .map((t) => DropdownMenuItem(value: t, child: Text(t, style: const TextStyle(fontSize: 13))))
                           .toList(),
@@ -607,7 +608,7 @@ class _ToolScreenState extends State<ToolScreen> {
             children: [
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _selectedPlatform,
+                  initialValue: _selectedPlatform,
                   items: _platforms.map((p) => DropdownMenuItem(value: p, child: Text(p))).toList(),
                   onChanged: (val) => setState(() => _selectedPlatform = val ?? _selectedPlatform),
                 ),
@@ -615,7 +616,7 @@ class _ToolScreenState extends State<ToolScreen> {
               const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: DropdownButtonFormField<String>(
-                  value: _selectedTone,
+                  initialValue: _selectedTone,
                   items: _tones.map((t) => DropdownMenuItem(value: t, child: Text(t))).toList(),
                   onChanged: (val) => setState(() => _selectedTone = val ?? _selectedTone),
                 ),
