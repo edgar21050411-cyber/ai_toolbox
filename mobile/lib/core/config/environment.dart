@@ -40,13 +40,15 @@ class EnvConfig {
     const envDefinedUrl = String.fromEnvironment('SUPABASE_URL');
     const envDefinedKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
+    if (envDefinedUrl.isEmpty || envDefinedKey.isEmpty) {
+      throw StateError(
+        'SUPABASE_URL y SUPABASE_ANON_KEY deben ser provistos via --dart-define. '
+        'El uso de placeholders ha sido eliminado por completo.',
+      );
+    }
+
     switch (effectiveEnv) {
       case AppEnvironment.production:
-        if (envDefinedUrl.isEmpty || envDefinedKey.isEmpty) {
-          throw StateError(
-            'Produccion requiere configurar SUPABASE_URL y SUPABASE_ANON_KEY reales via --dart-define. Placeholders no permitidos.',
-          );
-        }
         current = EnvConfig(
           environment: AppEnvironment.production,
           supabaseUrl: envDefinedUrl,
@@ -57,25 +59,21 @@ class EnvConfig {
         break;
 
       case AppEnvironment.staging:
-        final url = envDefinedUrl.isNotEmpty ? envDefinedUrl : 'https://staging.supabase.co';
-        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'staging-anon-key';
         current = EnvConfig(
           environment: AppEnvironment.staging,
-          supabaseUrl: url,
-          supabaseAnonKey: key,
-          apiBaseUrl: '$url/functions/v1',
+          supabaseUrl: envDefinedUrl,
+          supabaseAnonKey: envDefinedKey,
+          apiBaseUrl: '$envDefinedUrl/functions/v1',
           enableLogging: true,
         );
         break;
 
       case AppEnvironment.development:
-        final url = envDefinedUrl.isNotEmpty ? envDefinedUrl : 'https://dev.supabase.co';
-        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'dev-anon-key';
         current = EnvConfig(
           environment: AppEnvironment.development,
-          supabaseUrl: url,
-          supabaseAnonKey: key,
-          apiBaseUrl: '$url/functions/v1',
+          supabaseUrl: envDefinedUrl,
+          supabaseAnonKey: envDefinedKey,
+          apiBaseUrl: '$envDefinedUrl/functions/v1',
           enableLogging: true,
         );
         break;
