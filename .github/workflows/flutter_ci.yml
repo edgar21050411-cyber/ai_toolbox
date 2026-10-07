@@ -1,4 +1,4 @@
-﻿name: Flutter Cloud CI & APK Build
+name: Flutter Cloud CI & APK Build
 
 on:
   push:
@@ -82,7 +82,7 @@ jobs:
         run: |
           flutter build apk --debug \
             --dart-define=ENVIRONMENT=production \
-            --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} \
+            --dart-define=SUPABASE_URL=${{ vars.SUPABASE_URL || secrets.SUPABASE_URL }} \
             --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}
 
       - name: Upload Debug APK Artifact
