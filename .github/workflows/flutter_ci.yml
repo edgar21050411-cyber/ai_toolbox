@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
+    inputs:
+      supabase_url:
+        description: 'Supabase Cloud URL (opcional si se configuró en GitHub Secrets/Vars)'
+        required: false
+        type: string
+      supabase_anon_key:
+        description: 'Supabase Cloud Anon Key (opcional si se configuró en GitHub Secrets/Vars)'
+        required: false
+        type: string
 
 jobs:
   build-and-test:
@@ -79,7 +88,29 @@ jobs:
 
       - name: Build Debug APK
         working-directory: mobile
-        run: flutter build apk --debug
+        env:
+          SUPABASE_URL: ${{ inputs.supabase_url || secrets.SUPABASE_URL || vars.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ inputs.supabase_anon_key || secrets.SUPABASE_ANON_KEY || vars.SUPABASE_ANON_KEY }}
+        run: |
+          DART_DEFINES=()
+          if [ -n "$SUPABASE_URL" ]; then
+            echo "Inyectando SUPABASE_URL para Supabase Cloud..."
+            DART_DEFINES+=(--dart-define="SUPABASE_URL=$SUPABASE_URL")
+          else
+            echo "::warning title=Supabase Cloud::SUPABASE_URL no está definido en Secrets o Vars."
+          fi
+
+          if [ -n "$SUPABASE_ANON_KEY" ]; then
+            echo "Inyectando SUPABASE_ANON_KEY para Supabase Cloud..."
+            DART_DEFINES+=(--dart-define="SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY")
+          else
+            echo "::warning title=Supabase Cloud::SUPABASE_ANON_KEY no está definido en Secrets o Vars."
+          fi
+
+          DART_DEFINES+=(--dart-define="ENVIRONMENT=production")
+
+          echo "Compilando APK con configuraciones de entorno..."
+          flutter build apk --debug "${DART_DEFINES[@]}"
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
