@@ -19,8 +19,8 @@ import 'services/analytics/analytics_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 1. Inicializar configuración de entorno
-  EnvConfig.initialize(env: AppEnvironment.development);
+  // 1. Inicializar configuracion de entorno
+  EnvConfig.initialize();
 
   // 2. Inicializar Supabase cliente
   await SupabaseConfig.initialize();
