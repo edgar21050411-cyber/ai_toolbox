@@ -37,23 +37,29 @@ class EnvConfig {
       effectiveEnv = env ?? AppEnvironment.development;
     }
 
-    const envDefinedUrl = String.fromEnvironment('SUPABASE_URL');
-    const envDefinedKey = String.fromEnvironment('SUPABASE_ANON_KEY');
+    const rawUrl = String.fromEnvironment('SUPABASE_URL');
+    const rawKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
-    if (envDefinedUrl.isEmpty || envDefinedKey.isEmpty) {
+    final cleanUrl = rawUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    final cleanKey = rawKey.trim();
+
+    if (cleanUrl.isEmpty || cleanKey.isEmpty) {
       throw StateError(
         'SUPABASE_URL y SUPABASE_ANON_KEY deben ser provistos via --dart-define. '
         'El uso de placeholders ha sido eliminado por completo.',
       );
     }
 
+    // Construccion dinamica de apiBaseUrl a partir de la URL real de Supabase
+    final dynamicApiBaseUrl = '$cleanUrl/functions/v1';
+
     switch (effectiveEnv) {
       case AppEnvironment.production:
         current = EnvConfig(
           environment: AppEnvironment.production,
-          supabaseUrl: envDefinedUrl,
-          supabaseAnonKey: envDefinedKey,
-          apiBaseUrl: '$envDefinedUrl/functions/v1',
+          supabaseUrl: cleanUrl,
+          supabaseAnonKey: cleanKey,
+          apiBaseUrl: dynamicApiBaseUrl,
           enableLogging: false,
         );
         break;
@@ -61,9 +67,9 @@ class EnvConfig {
       case AppEnvironment.staging:
         current = EnvConfig(
           environment: AppEnvironment.staging,
-          supabaseUrl: envDefinedUrl,
-          supabaseAnonKey: envDefinedKey,
-          apiBaseUrl: '$envDefinedUrl/functions/v1',
+          supabaseUrl: cleanUrl,
+          supabaseAnonKey: cleanKey,
+          apiBaseUrl: dynamicApiBaseUrl,
           enableLogging: true,
         );
         break;
@@ -71,9 +77,9 @@ class EnvConfig {
       case AppEnvironment.development:
         current = EnvConfig(
           environment: AppEnvironment.development,
-          supabaseUrl: envDefinedUrl,
-          supabaseAnonKey: envDefinedKey,
-          apiBaseUrl: '$envDefinedUrl/functions/v1',
+          supabaseUrl: cleanUrl,
+          supabaseAnonKey: cleanKey,
+          apiBaseUrl: dynamicApiBaseUrl,
           enableLogging: true,
         );
         break;
