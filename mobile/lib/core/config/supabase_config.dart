@@ -2,17 +2,15 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'environment.dart';
 
 class SupabaseConfig {
-  static const String _defaultUrl = 'https://xyzcompany.supabase.co';
-  static const String _defaultKey = 'public-anon-key-placeholder';
-
   static Future<void> initialize() async {
-    final String url = EnvConfig.current.supabaseUrl.isNotEmpty 
-        ? EnvConfig.current.supabaseUrl 
-        : const String.fromEnvironment('SUPABASE_URL', defaultValue: _defaultUrl);
+    final String url = EnvConfig.current.supabaseUrl;
+    final String anonKey = EnvConfig.current.supabaseAnonKey;
 
-    final String anonKey = EnvConfig.current.supabaseAnonKey.isNotEmpty
-        ? EnvConfig.current.supabaseAnonKey
-        : const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: _defaultKey);
+    if (url.isEmpty || anonKey.isEmpty) {
+      throw StateError(
+        'SupabaseConfig: SUPABASE_URL y SUPABASE_ANON_KEY deben estar definidos y no pueden ser nulos ni vacios.',
+      );
+    }
 
     await Supabase.initialize(
       url: url,

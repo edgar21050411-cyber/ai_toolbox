@@ -41,20 +41,24 @@ class EnvConfig {
     const envDefinedKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
     switch (effectiveEnv) {
-      case AppEnvironment.development:
-        final url = envDefinedUrl.isNotEmpty ? envDefinedUrl : 'https://dev.supabase.co';
-        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'dev-anon-key-placeholder';
+      case AppEnvironment.production:
+        if (envDefinedUrl.isEmpty || envDefinedKey.isEmpty) {
+          throw StateError(
+            'Produccion requiere configurar SUPABASE_URL y SUPABASE_ANON_KEY reales via --dart-define. Placeholders no permitidos.',
+          );
+        }
         current = EnvConfig(
-          environment: AppEnvironment.development,
-          supabaseUrl: url,
-          supabaseAnonKey: key,
-          apiBaseUrl: '$url/functions/v1',
-          enableLogging: true,
+          environment: AppEnvironment.production,
+          supabaseUrl: envDefinedUrl,
+          supabaseAnonKey: envDefinedKey,
+          apiBaseUrl: '$envDefinedUrl/functions/v1',
+          enableLogging: false,
         );
         break;
+
       case AppEnvironment.staging:
         final url = envDefinedUrl.isNotEmpty ? envDefinedUrl : 'https://staging.supabase.co';
-        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'staging-anon-key-placeholder';
+        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'staging-anon-key';
         current = EnvConfig(
           environment: AppEnvironment.staging,
           supabaseUrl: url,
@@ -63,15 +67,16 @@ class EnvConfig {
           enableLogging: true,
         );
         break;
-      case AppEnvironment.production:
-        final url = envDefinedUrl.isNotEmpty ? envDefinedUrl : 'https://app.supabase.co';
-        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'prod-anon-key-placeholder';
+
+      case AppEnvironment.development:
+        final url = envDefinedUrl.isNotEmpty ? envDefinedUrl : 'https://dev.supabase.co';
+        final key = envDefinedKey.isNotEmpty ? envDefinedKey : 'dev-anon-key';
         current = EnvConfig(
-          environment: AppEnvironment.production,
+          environment: AppEnvironment.development,
           supabaseUrl: url,
           supabaseAnonKey: key,
           apiBaseUrl: '$url/functions/v1',
-          enableLogging: false,
+          enableLogging: true,
         );
         break;
     }
